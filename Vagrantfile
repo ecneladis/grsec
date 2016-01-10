@@ -5,6 +5,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define 'grsec-build', primary: true do |build|
     build.vm.box = "ubuntu/trusty64"
+    build.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
     build.vm.hostname = "grsec-build"
 
     build.vm.provision :ansible do |ansible|
@@ -30,8 +31,8 @@ Vagrant.configure("2") do |config|
   # In case of problems, you don't want to pollute the build machine
   # with the test packages.
   config.vm.define 'grsec-install', autostart: false do |install|
-    install.vm.box = "ubuntu/trusty64"
     install.vm.box = "debian/jessie64"
+    install.vm.box_url = "https://atlas.hashicorp.com/debian/boxes/jessie64/versions/8.2.2/providers/virtualbox.box"
     install.vm.hostname = "grsec-install"
     # If grsec install works, the shared folder mount will fail.
     # Set `disabled: true` below to prevent the error post-install.
